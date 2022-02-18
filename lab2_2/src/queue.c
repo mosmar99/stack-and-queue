@@ -9,9 +9,10 @@
 #define T 10 // simulation runs for 10 seconds
 
 struct queue* create_queue() {
-	struct queue* queue = (struct queue*) malloc(sizeof(struct queue));
-
-	return queue;  
+	struct queue *q = (struct queue*) malloc(sizeof(struct queue));
+	q->front = NULL;
+	q->rear = NULL;
+	return q;  
 }
 
 void enqueue(struct queue *q, struct task *t) {
@@ -33,8 +34,8 @@ void enqueue(struct queue *q, struct task *t) {
 struct task* dequeue(struct queue *q) {
 	if (q->front == NULL) // could also check REAR ==  NULL
 	{
-		fprintf(stderr, "Underflow");
-		return;
+		fprintf(stderr, "\n UNDERFLOW");
+		return q;
 	}
 	
 	struct node *ptr = q->front;
@@ -44,7 +45,25 @@ struct task* dequeue(struct queue *q) {
 }
 
 void display_queue(struct queue *q) {
-	
+	struct node *currNode;
+	currNode = q->front;
+	if (currNode == NULL)
+	{
+		printf("\n QUEUE IS EMPTY");
+	}
+	else
+	{
+		printf("\n");
+		while (currNode != q->rear) {
+			printf("TASKS IN QUEUE");
+			printf("TASK [arrives at %d second, %d pages]", 
+			currNode->ptrTaskNext->time_stamp, currNode->ptrTaskNext->pages);
+			currNode = currNode->ptrNodeNext;
+		}
+		printf("TASKS IN QUEUE");
+		printf("TASK [arrives at %d second, %d pages]", 
+		currNode->ptrTaskNext->time_stamp, currNode->ptrTaskNext->pages);
+	}
 }
 
 int is_empty(struct queue *q) {
