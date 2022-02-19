@@ -34,10 +34,10 @@ struct task* dequeue(struct queue *q) {
 		return q;
 	}
 	
-	struct node *ptr = q->front;
-	q->front = q->front->ptrNodeNext;
-	free(ptr);
-	return q;
+	struct node *firstFront = q->front; // save pointer to initial front
+	q->front = q->front->ptrNodeNext; // update front, move one step closer to rear
+	firstFront->ptrNodeNext = NULL; // detaching it completely from queue
+	return firstFront->ptrTaskNext; // return the task to the node pointed by "firstFront" in qeueue
 }
 
 void display_queue(struct queue *q) {
