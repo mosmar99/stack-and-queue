@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 #include "task.h"
 #include "queue.h"
 #include "printer.h"
@@ -19,13 +20,13 @@ int main(void) {
     struct task* removedTask;
     while (t != T) {
 
-        if (t == 1 || t == 2) // enqueue at 1 and 2 seconds for console output 
+        if (t == 1) // enqueue at first second for console output 
         {
             enqueue(q, create_task(t));
         } 
-        else        // enqueues ~20% of the time
+        else        // enqueues ~50% of the time
         {
-            if (1 == 1 + (rand() % 5)) 
+            if (1 == (rand() % N)) 
             {
                 enqueue(q, create_task(t));
             }
@@ -39,10 +40,7 @@ int main(void) {
             display_queue(q);
             removedTask = dequeue(q); // removeTask is not necessary but increases readability
             p->current_task = removedTask;
-            // reliability: ceil because sometimes the printer will take longer then the average time
-            // then I do rather then have a always correct upperbound then a sometimes correct rounding
-            p->time_remaining = 
-                ceil((double)p->current_task->pages * ((double)MIN) / p->page_rate);
+            p->time_remaining = round(((double)p->current_task->pages * ((double)MIN) / p->page_rate) - 1.0);
         }
         else
         {

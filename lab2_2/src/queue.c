@@ -50,13 +50,11 @@ void display_queue(struct queue *q) {
 	else
 	{
 		printf("\n");
+		printf("TASKS IN QUEUE:");
 		while (currNode != q->rear) {
-			printf("TASKS IN QUEUE:");
-			printf("\nTASK [arrives at %d second, %d pages]\n", 
-			currNode->ptrTaskNext->time_stamp, currNode->ptrTaskNext->pages);
+			printf("\nTASK [arrives at %d second, %d pages]", currNode->ptrTaskNext->time_stamp, currNode->ptrTaskNext->pages);
 			currNode = currNode->ptrNodeNext;
 		}
-		printf("TASKS IN QUEUE:");
 		printf("\nTASK [arrives at %d second, %d pages]\n", 
 		currNode->ptrTaskNext->time_stamp, currNode->ptrTaskNext->pages);
 	}

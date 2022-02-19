@@ -3,8 +3,8 @@
 #include <stdbool.h>
 
 void tick(struct printer *p) {
-    printf("\n%u seconds to complete the current task.", p->time_remaining);
     p->time_remaining -= 1;
+    printf("\n%u seconds to complete the current task.", p->time_remaining);
 }
 
 int is_busy(struct printer *p) {
