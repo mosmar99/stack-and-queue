@@ -28,10 +28,10 @@ void enqueue(struct queue *q, struct task *t) {
 }
 
 struct task* dequeue(struct queue *q) {
-	if (q->front == NULL) // could also check REAR ==  NULL
+	if (q->front == NULL) // could also check REAR ==  NULL, means list is empty
 	{
 		fprintf(stderr, "\n UNDERFLOW");
-		return q;
+		return NULL; // there is no task to return since the list is empty
 	}
 	
 	struct node *firstFront = q->front; // save pointer to initial front
@@ -45,19 +45,19 @@ void display_queue(struct queue *q) {
 	currNode = q->front;
 	if (currNode == NULL)
 	{
-		printf("\n QUEUE IS EMPTY");
+		printf("\nQUEUE IS EMPTY\n");
 	}
 	else
 	{
 		printf("\n");
 		while (currNode != q->rear) {
-			printf("TASKS IN QUEUE");
-			printf("TASK [arrives at %d second, %d pages]", 
+			printf("TASKS IN QUEUE:");
+			printf("\nTASK [arrives at %d second, %d pages]\n", 
 			currNode->ptrTaskNext->time_stamp, currNode->ptrTaskNext->pages);
 			currNode = currNode->ptrNodeNext;
 		}
-		printf("TASKS IN QUEUE");
-		printf("TASK [arrives at %d second, %d pages]", 
+		printf("TASKS IN QUEUE:");
+		printf("\nTASK [arrives at %d second, %d pages]\n", 
 		currNode->ptrTaskNext->time_stamp, currNode->ptrTaskNext->pages);
 	}
 }

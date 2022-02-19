@@ -7,7 +7,7 @@
 #define N 2 // 1 print task / N (2) seconds
 #define M 5 // length of print tasks ranges between: 1 to M (5) pages
 #define P 40 // printer can process P (40) pages / 60 seconds
-#define T 10 // simulation runs for 10 seconds
+#define T 5 // simulation runs for 10 seconds
 
 
 //declare task

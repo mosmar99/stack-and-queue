@@ -1,5 +1,6 @@
 #include "task.h"
 #include <stdlib.h>
+#include <time.h>
 
 struct task* create_task(int ct) {
     srand(time(NULL));
