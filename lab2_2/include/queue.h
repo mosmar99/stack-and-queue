@@ -1,15 +1,9 @@
 //the interface for the FIFO queue ADT
 //Written by He Tan, Feb 2022
-#include "task.h"
-
 #ifndef QUEUE_H_ /* Include guard */
 #define QUEUE_H_
 
-// declare node
-struct node {
-	struct node *ptrNodeNext;
-	struct task *ptrTaskNext;
-};
+#include "task.h"
 
 //declare queue
 struct queue {

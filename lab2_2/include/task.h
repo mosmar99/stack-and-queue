@@ -1,4 +1,3 @@
-
 //the interface for the task ADT
 //Written by He Tan, Feb 2022
 #ifndef TASK_H_ /* Include guard */

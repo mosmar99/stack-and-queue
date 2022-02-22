@@ -1,8 +1,13 @@
 #include "queue.h"
-#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
+// declare node
+struct node {
+	struct node *ptrNodeNext;
+	struct task *ptrTaskNext;
+};
 
 struct queue* create_queue() {
 	struct queue *q = (struct queue*) malloc(sizeof(struct queue));
@@ -30,7 +35,7 @@ void enqueue(struct queue *q, struct task *t) {
 struct task* dequeue(struct queue *q) {
 	if (q->front == NULL) // could also check REAR ==  NULL, means list is empty
 	{
-		fprintf(stderr, "\n UNDERFLOW");
+		fprintf(stderr, "UNDERFLOW\n");
 		return NULL; // there is no task to return since the list is empty
 	}
 	
