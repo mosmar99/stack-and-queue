@@ -7,17 +7,19 @@
 #include <stdbool.h>
 
 int main(void) {
+    // mallocate (dynamic memory alloc.) memory for the printer and init page rate and current task
     struct printer* p = (struct printer*) malloc(sizeof(struct printer));
     p->page_rate = P;
     p->current_task = NULL;
 
+    // create a queue for the printer
     struct queue* q = create_queue();
 
     srand(time(NULL)); // seeds according to current time
     unsigned int t = 1, r;
     struct task* removedTask;
     while (t != T) {
-        // a random number between 1 and 2
+        // a random number between 1 and N
         r = 1 + rand() % N; 
 
         printf("\n===== %d =====", t);
@@ -63,18 +65,19 @@ int main(void) {
             
 
             // set time remaining
-            if (p->current_task->pages == 1) {
+            if (p->current_task->pages == 1) { // set time to 2s if page equals 1, otherwise, print busy will never be printed
                 p->time_remaining = 2;
             }
-            else if (((p->current_task->pages * 15) % 10) == 0) // check if seconds remaining is not a whole number
+            else if (((p->current_task->pages * 15) % 10) == 0) // check if time remaining is a whole number
             {
                 p->time_remaining = (p->current_task->pages * 3) / 2;
-            } else {  // the answer is a whole number
+            } else {  
                 p->time_remaining = (((p->current_task->pages * 3) + 1)/2) - 1; // round down if 0.5
             }
             
         }
 
+        // clear current task, prepare for new insertion
         if (p->time_remaining - 1 == 0)
         {
             p->current_task = NULL;

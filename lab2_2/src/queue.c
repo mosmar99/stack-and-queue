@@ -17,14 +17,14 @@ struct queue* create_queue() {
 }
 
 void enqueue(struct queue *q, struct task *t) {
-    struct node* newTask = (struct node*) malloc(sizeof(struct node));
+    struct node* newTask = (struct node*) malloc(sizeof(struct node)); // dyn. alloc. memory for new task
     newTask->ptrTaskNext = t;
-	if (q->front == NULL)
+	if (q->front == NULL) // if queue is prev. empty
 	{
 		q->front = q->rear = newTask;
 		q->front->ptrNodeNext = q->rear->ptrNodeNext = NULL;
 	}
-	else
+	else 
 	{
 		q->rear->ptrNodeNext = newTask;
 		q->rear = newTask;
@@ -48,7 +48,7 @@ struct task* dequeue(struct queue *q) {
 void display_queue(struct queue *q) {
 	struct node *currNode;
 	currNode = q->front;
-	if (currNode == NULL)
+	if (currNode == NULL) // there is no queue to print
 	{
 		printf("\nQUEUE IS EMPTY\n");
 	}
@@ -56,7 +56,7 @@ void display_queue(struct queue *q) {
 	{
 		printf("\n");
 		printf("TASKS IN QUEUE:");
-		while (currNode != q->rear) {
+		while (currNode != q->rear) { // loop from front until rear is hit, print all members of the queue
 			printf("\nTASK [arrives at %d second, %d pages]", currNode->ptrTaskNext->time_stamp, currNode->ptrTaskNext->pages);
 			currNode = currNode->ptrNodeNext;
 		}
